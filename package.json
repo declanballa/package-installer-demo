@@ -4,14 +4,15 @@
   "description": "This is a a sample exercise to demonstrate ingesting a list of dependencies and outputting its install order",
   "main": "app.js",
   "scripts": {
-    "test": "test"
+    "start": "node src/app.js",
+    "test": "jasmine test/app.spec.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/declanballa/package-installer-demo.git"
   },
   "author": "Declan Balla",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/declanballa/package-installer-demo/issues"
   },
@@ -19,8 +20,8 @@
   "dependencies": {},
   "devDependencies": {
     "jasmine": "^2.8.0",
+    "jasmine-node": "^1.14.5",
     "jscs": "^3.0.7",
-    "jshint": "^2.9.5",
-    "karma": "^1.7.1"
+    "jshint": "^2.9.5"
   }
 }
