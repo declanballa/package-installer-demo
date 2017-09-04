@@ -4,8 +4,9 @@
   "description": "This is a a sample exercise to demonstrate ingesting a list of dependencies and outputting its install order",
   "main": "app.js",
   "scripts": {
-    "start": "node src/app.js",
-    "test": "jasmine test/app.spec.js"
+    "start": "node src/package-installer.js",
+    "test": "jasmine test/package-installer.spec.js",
+    "test-watch": "nodemon --exec 'npm test' --watch src --watch test"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
     "jasmine": "^2.8.0",
     "jasmine-node": "^1.14.5",
     "jscs": "^3.0.7",
-    "jshint": "^2.9.5"
+    "jshint": "^2.9.5",
+    "nodemon": "^1.11.0"
   }
 }

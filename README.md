@@ -21,3 +21,8 @@ Run tests with
 ```
 npm test
 ```
+
+or watch with
+```
+npm run test-watch
+```
