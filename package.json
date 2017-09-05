@@ -2,7 +2,7 @@
   "name": "package-installer-demo",
   "version": "1.0.0",
   "description": "This is a a sample exercise to demonstrate ingesting a list of dependencies and outputting its install order",
-  "main": "app.js",
+  "main": "package-installer.js",
   "scripts": {
     "start": "node src/package-installer.js",
     "test": "jasmine test/package-installer.spec.js",

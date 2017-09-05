@@ -6,7 +6,6 @@
     const PackageInstaller = require('../src/package-installer.js');
     const pi = new PackageInstaller();
     const sampleInput = ['KittenService: ','Leetmeme: Cyberportal','Cyberportal: Ice','CamelCaser: KittenService','Fraudstream: Leetmeme','Ice: '];
-    const sampleOutput = ['KittenService', 'Ice', 'Cyberportal', 'Leetmeme', 'CamelCaser', 'Fraudstream'];
     const sampleIncorrectFormat = ['KittService', 'Leetmeme- '];
     const validationErrorText = '\n' + 'Item(s) in your list are not formed properly. Please try again.' + ' \n';
     const sampleCycledDependency = ['KittenService: ','Leetmeme: Cyberportal','Cyberportal: Ice','CamelCaser: KittenService','Fraudstream: ','Ice: Leetmeme'];
