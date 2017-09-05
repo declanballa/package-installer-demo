@@ -2,48 +2,83 @@
 (function() {
     'use strict';
 
+    var jasmine = require('jasmine');
     const PackageInstaller = require('../src/package-installer.js');
     const pi = new PackageInstaller();
-    const sampleInput = [
-        'ReportService: AnalyticsService',
-        'AnalyticsService'
-    ];
+    const sampleInput = ['KittenService: ','Leetmeme: Cyberportal','Cyberportal: Ice','CamelCaser: KittenService','Fraudstream: Leetmeme','Ice: '];
+    const sampleOutput = ['KittenService', 'Ice', 'Cyberportal', 'Leetmeme', 'CamelCaser', 'Fraudstream'];
+    const sampleIncorrectFormat = ['KittService', 'Leetmeme- '];
+    const validationErrorText = '\n' + 'Item(s) in your list are not formed properly. Please try again.' + ' \n';
+    const sampleCycledDependency = ['KittenService: ','Leetmeme: Cyberportal','Cyberportal: Ice','CamelCaser: KittenService','Fraudstream: ','Ice: Leetmeme'];
+    const cycleErrorText = '\n' + 'Your list contains a dependency cycle! Please try again.' + ' \n';
     
-    describe('Package Installer Tests --', function() {
-        it('promptText should be type of string', function() {
-            expect(typeof pi.promptText).toBe('string');
+    describe('Package Installer Tests --', () => {
+        describe('Properties and Functions:', () => {
+            it('promptText should be type of string', () => {
+                expect(typeof pi.promptText).toBe('string');
+            });
+        
+            it('validationErrorText should be type of string', () => {
+                expect(typeof pi.validationErrorText).toBe('string');
+            });
+    
+            it('cycleErrorText should be type of string', () => {
+                expect(typeof pi.cycleErrorText).toBe('string');
+            });
+        
+            it('packageList should be type of array', () => {
+                expect(Array.isArray(pi.packageList)).toBe(true);
+            });
+    
+            it('packageInstallOrder should be type of array', () => {
+                expect(Array.isArray(pi.packageInstallOrder)).toBe(true);
+            });
+    
+            it('cycleExists should be type of boolean', () => {
+                expect(typeof pi.cycleExists).toBe('boolean');
+            });
+    
+            it('processPackageIngestion should be a type of function', () => {
+                expect(typeof pi.processPackageIngestion).toBe('function');
+            });
+    
+            it('validateInput should be a type of function', () => {
+                expect(typeof pi.validateInput).toBe('function');
+            });
+    
+            it('validateInput should return a type of boolean', () => {
+                expect(typeof pi.validateInput(sampleInput)).toBe('boolean');
+            });
+    
+            it('processPackages should be a type of function', () => {
+                expect(typeof pi.processPackages).toBe('function');
+            });
+    
+            it('scanPackageList should be a type of function', () => {
+                expect(typeof pi.scanPackageList).toBe('function');
+            });
+    
+            it('checkForDependencyCycling should be a type of function', () => {
+                expect(typeof pi.checkForDependencyCycling).toBe('function');
+            });
         });
     
-        it('validationErrorText should be type of string', function() {
-            expect(typeof pi.validationErrorText).toBe('string');
-        });
+        describe('Error Handling:', () => {
+            it('error should be thrown when items without colons are entered', () => {
+                var spy = spyOn(console, 'log');
 
-        it('cycleErrorText should be type of string', function() {
-            expect(typeof pi.cycleErrorText).toBe('string');
-        });
-    
-        it('packageList should be type of object (array)', function() {
-            expect(typeof pi.packageList).toBe('object');
-        });
+                pi.processPackageIngestion(sampleIncorrectFormat);
 
-        it('installOrder should be type of object (array)', function() {
-            expect(typeof pi.installOrder).toBe('object');
-        });
+                expect(spy).toHaveBeenCalledWith(validationErrorText);
+            });
 
-        it('cycleExists should be type of boolean', function() {
-            expect(typeof pi.cycleExists).toBe('boolean');
-        });
+            it('error should be thrown when a list contains a dependency cycle', () => {
+                var spy = spyOn(console, 'log');
+                
+                pi.processPackageIngestion(sampleCycledDependency);
 
-        it('showPrompt should be a type of function', function() {
-            expect(typeof pi.showPrompt).toBe('function');
-        });
-
-        it('validateInput should be a type of function', function() {
-            expect(typeof pi.validateInput).toBe('function');
-        });
-
-        it('validateInput should return a type of boolean', function() {
-            expect(typeof pi.validateInput(sampleInput)).toBe('boolean');
+                expect(spy).toHaveBeenCalledWith(cycleErrorText);
+            });
         });
     });
 }());
